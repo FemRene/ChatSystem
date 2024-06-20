@@ -46,7 +46,11 @@ public class onChat implements Listener {
             Bukkit.broadcast(Component.text(ChatColor.translateAlternateColorCodes('&',txt)));
             Bukkit.broadcast(Component.text(ChatSystem.getFromConf("arrow")));
         } else if (p.hasPermission("chat.write")) {
-            Bukkit.broadcast(Component.text(ChatColor.translateAlternateColorCodes('&',txt)));
+            //Bukkit.broadcast(Component.text(ChatColor.translateAlternateColorCodes('&',txt)));
+            String finalTxt = txt;
+            Bukkit.getOnlinePlayers().forEach(player -> {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', finalTxt));
+            });
         }
     }
 
