@@ -17,8 +17,13 @@ no Commands yet
 ## Configs
 ```
 config.yml
-    arrow: '§8»'
-    msg: '%prefix %arrow &7%player: &r%message'
+    arrow: <#555555>»
+    msg: '%prefix %arrow <#AAAAAA>%player %suffix: <reset>%message'
+    mentionMessage: <#55FFFF>@%player<reset>
+    useMetaKeyAsPrefix: false
+    metaPrefixString: META-KEY
+    useMetaKeyAsSuffix: true
+    metaSuffixString: message-color
 ```
 ## API
 No API's yet
