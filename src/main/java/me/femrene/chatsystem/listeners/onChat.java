@@ -30,10 +30,13 @@ public class onChat implements Listener {
             } else {
                 prefix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix();
             }
+            System.out.println(ChatSystem.getBooleanFromConf("useMetaKeyAsSuffix"));
             if (ChatSystem.getBooleanFromConf("useMetaKeyAsSuffix")) {
+                System.out.println(1);
                 suffix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getMetaValue(ChatSystem.getFromConf("metaSuffixString"));
             } else {
-                suffix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix();
+                System.out.println(2);
+                suffix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getSuffix();
             }
         }
         String[] s = e.getMessage().split(" ");
@@ -49,6 +52,12 @@ public class onChat implements Listener {
             prefix = ChatColor.translateAlternateColorCodes('&',prefix);
         else
             prefix = "";
+        if (suffix != null)
+            suffix = ChatColor.translateAlternateColorCodes('&',suffix);
+        else
+            suffix = "";
+        System.out.println(prefix);
+        System.out.println(suffix);
         e.setMessage(String.join(" ",s));
         e.setCancelled(true);
         String txt = ChatSystem.getFromConf("msg");

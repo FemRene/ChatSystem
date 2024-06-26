@@ -1,5 +1,6 @@
 package me.femrene.chatsystem;
 
+import me.femrene.chatsystem.commands.PluginReload;
 import me.femrene.chatsystem.listeners.onChat;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,8 +14,10 @@ public final class ChatSystem extends JavaPlugin {
     public void onEnable() {
         instance = this;
         setConf();
-        // Plugin startup logic
+        // Listener
         Bukkit.getPluginManager().registerEvents(new onChat(), this);
+        // Commands
+        getCommand("creload").setExecutor(new PluginReload());
     }
 
     @Override
@@ -49,13 +52,13 @@ public final class ChatSystem extends JavaPlugin {
             config.set("mentionMessage", "<#55FFFF>@%player<reset>");
         }
         if (!config.contains("useMetaKeyAsPrefix")) {
-            config.set("useMetaKeyAsPrefix", "false");
+            config.set("useMetaKeyAsPrefix", false);
         }
         if (!config.contains("metaPrefixString")) {
             config.set("metaPrefixString", "META-KEY");
         }
         if (!config.contains("useMetaKeyAsSuffix")) {
-            config.set("useMetaKeyAsSuffix", "false");
+            config.set("useMetaKeyAsSuffix", false);
         }
         if (!config.contains("metaSuffixString")) {
             config.set("metaSuffixString", "META-KEY");

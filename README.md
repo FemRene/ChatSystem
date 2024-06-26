@@ -4,7 +4,7 @@ A very simple ChatSystem for Bukkit/Spigot/Paper Servers
 - [x] Mentionable Users
 - [x] Full editable Messages Design
 - [x] Important users 
-- [ ] RGB/HEX Support
+- [x] RGB/HEX Support
 - [ ] Ingame Reload
 ## Setup
 Download the latest Release [here](https://github.com/FemRene/ChatSystem/releases/latest/download/ChatSystem.jar)

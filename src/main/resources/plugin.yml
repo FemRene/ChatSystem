@@ -6,3 +6,5 @@ prefix: Chat
 authors: [FemRene]
 description: desc
 website: web
+commands:
+  creload:
