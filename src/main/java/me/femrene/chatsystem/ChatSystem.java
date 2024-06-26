@@ -31,14 +31,34 @@ public final class ChatSystem extends JavaPlugin {
         return config.getString(path);
     }
 
+    public static boolean getBooleanFromConf(String path) {
+        FileConfiguration config = instance.getConfig();
+        return config.getBoolean(path);
+    }
+
     private static void setConf() {
         instance.saveDefaultConfig();
         FileConfiguration config = instance.getConfig();
         if (!config.contains("arrow")) {
-            config.set("arrow", "§8»");
+            config.set("arrow", "<#555555>»");
         }
         if (!config.contains("msg")) {
-            config.set("msg", "%prefix %arrow &7%player: &r%message");
+            config.set("msg", "%prefix %arrow <#AAAAAA>%player %suffix: <reset>%message");
+        }
+        if (!config.contains("mentionMessage")) {
+            config.set("mentionMessage", "<#55FFFF>@%player<reset>");
+        }
+        if (!config.contains("useMetaKeyAsPrefix")) {
+            config.set("useMetaKeyAsPrefix", "false");
+        }
+        if (!config.contains("metaPrefixString")) {
+            config.set("metaPrefixString", "META-KEY");
+        }
+        if (!config.contains("useMetaKeyAsSuffix")) {
+            config.set("useMetaKeyAsSuffix", "false");
+        }
+        if (!config.contains("metaSuffixString")) {
+            config.set("metaSuffixString", "META-KEY");
         }
         instance.saveConfig();
     }
