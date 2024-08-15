@@ -23,8 +23,8 @@ config.yml
     mentionMessage: <#55FFFF>@%player<reset>
     useMetaKeyAsPrefix: false
     metaPrefixString: META-KEY
-    useMetaKeyAsSuffix: true
-    metaSuffixString: message-color
+    useMetaKeyAsSuffix: false
+    metaSuffixString: META-KEY
 ```
 ## API
 No API's yet
