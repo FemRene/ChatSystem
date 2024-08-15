@@ -63,6 +63,9 @@ public final class ChatSystem extends JavaPlugin {
         if (!config.contains("metaSuffixString")) {
             config.set("metaSuffixString", "META-KEY");
         }
+        if (!config.contains("pingSound")) {
+            config.set("pingSound", true);
+        }
         instance.saveConfig();
     }
 }

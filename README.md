@@ -2,8 +2,9 @@
 A very simple ChatSystem for Bukkit/Spigot/Paper Servers
 ## Features
 - [x] Mentionable Users
+- [x] Pings mentioned User
 - [x] Full editable Messages Design
-- [x] Important users 
+- [x] Important users
 - [x] RGB/HEX Support
 - [ ] Ingame Reload
 ## Setup

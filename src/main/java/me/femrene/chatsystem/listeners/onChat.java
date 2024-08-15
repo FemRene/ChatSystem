@@ -1,12 +1,15 @@
 package me.femrene.chatsystem.listeners;
 
 import me.femrene.chatsystem.ChatSystem;
+import me.femrene.chatsystem.enums.Converter;
 import me.femrene.chatsystem.util.GradientTextUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Instrument;
+import org.bukkit.Note;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,21 +33,23 @@ public class onChat implements Listener {
             } else {
                 prefix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix();
             }
-            System.out.println(ChatSystem.getBooleanFromConf("useMetaKeyAsSuffix"));
             if (ChatSystem.getBooleanFromConf("useMetaKeyAsSuffix")) {
-                System.out.println(1);
                 suffix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getMetaValue(ChatSystem.getFromConf("metaSuffixString"));
             } else {
-                System.out.println(2);
                 suffix = api.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getSuffix();
             }
         }
         String[] s = e.getMessage().split(" ");
         for (int i = 0; i < s.length; i++) {
             if (Bukkit.getPlayer(s[i]) != null && Bukkit.getPlayer(s[i]).getName().equals(s[i])) {
+                if (ChatSystem.getBooleanFromConf("pingSound")) {
+                    Bukkit.getPlayer(s[i]).playNote(p.getLocation(), Instrument.PLING, Note.sharp(2, Note.Tone.F));
+                }
                 s[i] = ChatSystem.getFromConf("mentionMessage").replace("%player", s[i]);
             } else if (Bukkit.getPlayer(s[i].replace("@","")) != null && Bukkit.getPlayer(s[i].replace("@","")).getName().equals(s[i].replace("@",""))) {
-                //s[i] = "<"+mColor+">@"+s[i].replace("@","")+"<reset>";
+                if (ChatSystem.getBooleanFromConf("pingSound")) {
+                    Bukkit.getPlayer(s[i]).playNote(p.getLocation(), Instrument.PLING, Note.sharp(2, Note.Tone.F));
+                }
                 s[i] = ChatSystem.getFromConf("mentionMessage").replace("%player", s[i].replace("@",""));
             }
         }
@@ -56,8 +61,6 @@ public class onChat implements Listener {
             suffix = ChatColor.translateAlternateColorCodes('&',suffix);
         else
             suffix = "";
-        System.out.println(prefix);
-        System.out.println(suffix);
         e.setMessage(String.join(" ",s));
         e.setCancelled(true);
         String txt = ChatSystem.getFromConf("msg");
@@ -66,17 +69,28 @@ public class onChat implements Listener {
         txt = txt.replace("%player",p.getName());
         txt = txt.replace("%message",e.getMessage());
         txt = txt.replace("%suffix",suffix);
+        txt = ChatColor.translateAlternateColorCodes('&',txt);
+        txt = translateColors(txt);
         if (p.hasPermission("chat.important")) {
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                onlinePlayer.sendMessage(translateHexColorCodes(ChatSystem.getFromConf("arrow")));
+                onlinePlayer.sendMessage(translateHexColorCodes(translateColors(ChatSystem.getFromConf("arrow"))));
                 onlinePlayer.sendMessage(translateHexColorCodes(txt));
-                onlinePlayer.sendMessage(translateHexColorCodes(ChatSystem.getFromConf("arrow")));
+                onlinePlayer.sendMessage(translateHexColorCodes(translateColors(ChatSystem.getFromConf("arrow"))));
             }
         } else if (p.hasPermission("chat.write")) {
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.sendMessage(translateHexColorCodes(txt));
             }
         }
+    }
+
+    private static String translateColors(String s) {
+        for (Converter value : Converter.values()) {
+            if (s.contains(value.getOldColor())) {
+                s = s.replaceAll(value.getOldColor(), value.getNewColor());
+            }
+        }
+        return s;
     }
 
     public Component translateHexColorCodes(String message)
