@@ -28,9 +28,17 @@ public class PluginReload implements CommandExecutor {
             Player player = (Player) sender;
             if (player.hasPermission("chatsystem.reload")) {
                 ChatSystem.getInstance().reloadConfig();
-                player.sendMessage(Component.text("The ChatSystem reloaded"));
+                player.sendMessage(Component.text("§aThe ChatSystem configuration has been reloaded successfully."));
+                return true;
+            } else {
+                player.sendMessage(Component.text("§cYou don't have permission to use this command."));
+                return true;
             }
+        } else {
+            // Allow console to reload the config
+            ChatSystem.getInstance().reloadConfig();
+            sender.sendMessage(Component.text("The ChatSystem configuration has been reloaded successfully."));
+            return true;
         }
-        return false;
     }
 }

@@ -1,1 +1,46 @@
-#For Hex Color Codes visit this Site: https://docs.advntr.dev/minimessage/format.html
+# ChatSystem Configuration
+# For Hex Color Codes and formatting visit: https://docs.advntr.dev/minimessage/format.html
+
+# ===== Chat Formatting =====
+# The arrow symbol used in chat messages
+arrow: <#555555>»
+
+# The format for chat messages
+# Available placeholders:
+# %prefix - Player's prefix from LuckPerms
+# %suffix - Player's suffix from LuckPerms
+# %player - Player's name
+# %message - The message content
+# %arrow - The arrow symbol defined above
+msg: '%prefix %arrow <#AAAAAA>%player %suffix: <reset>%message'
+
+# The format for mentioned players
+# %player will be replaced with the mentioned player's name
+mentionMessage: <#55FFFF>@%player<reset>
+
+# ===== LuckPerms Integration =====
+# Whether to use a meta key for prefix instead of LuckPerms default
+useMetaKeyAsPrefix: false
+
+# The meta key to use for prefix if useMetaKeyAsPrefix is true
+metaPrefixString: META-KEY
+
+# Whether to use a meta key for suffix instead of LuckPerms default
+useMetaKeyAsSuffix: false
+
+# The meta key to use for suffix if useMetaKeyAsSuffix is true
+metaSuffixString: META-KEY
+
+# ===== Mention Settings =====
+# Whether to play a sound when a player is mentioned
+pingSound: true
+
+# ===== Examples =====
+# Example of a gradient message format:
+# msg: '%prefix %arrow <gradient:#FF0000:#00FF00>%player</gradient> %suffix: <reset>%message'
+#
+# Example of a rainbow player name:
+# msg: '%prefix %arrow <rainbow>%player</rainbow> %suffix: <reset>%message'
+#
+# Example with hover and click events (requires Paper):
+# msg: '%prefix %arrow <hover:show_text:"Click to message"><click:suggest_command:"/msg %player ">%player</click></hover> %suffix: <reset>%message'

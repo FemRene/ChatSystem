@@ -4,7 +4,22 @@ main: me.femrene.chatsystem.ChatSystem
 api-version: '1.20'
 prefix: Chat
 authors: [FemRene]
-description: desc
-website: web
+description: A lightweight yet powerful chat enhancement plugin with user mentions, custom formatting, and RGB/HEX color support.
+website: https://github.com/FemRene/ChatSystem
 commands:
   creload:
+    description: Reloads the ChatSystem configuration
+    usage: /creload
+    permission: chatsystem.reload
+    permission-message: §cYou don't have permission to use this command.
+
+permissions:
+  chat.write:
+    description: Allows a player to write in chat
+    default: true
+  chat.important:
+    description: Makes the player's messages stand out with empty lines before and after
+    default: op
+  chatsystem.reload:
+    description: Allows use of the reload command
+    default: op
