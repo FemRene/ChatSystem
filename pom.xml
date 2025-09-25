@@ -6,7 +6,7 @@
 
   <groupId>me.femrene</groupId>
   <artifactId>ChatSystem</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>2_0</version>
   <packaging>jar</packaging>
 
   <name>ChatSystem</name>
